@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Add Transaction
+</h1>
+
+<div class="row">
+
+    <div class="col-md-7">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label>
+                Title
+            </label>
+
+            {{ form.title }}
+
+            <label>
+                Amount
+            </label>
+
+            {{ form.amount }}
+
+            <label>
+                Transaction Type
+            </label>
+
+            {{ form.transaction_type }}
+
+            <label>
+                Category
+            </label>
+
+            {{ form.category }}
+
+            <button type="submit"
+                    class="custom-btn mt-3">
+
+                Save Transaction
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

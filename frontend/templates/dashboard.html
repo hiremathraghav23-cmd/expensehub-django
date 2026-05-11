@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">
+    Dashboard
+</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <a href="/add/" class="custom-btn">
+        Add Transaction
+    </a>
+
+    <!-- Search -->
+
+    <form method="GET" style="width:300px;">
+
+        <input type="text"
+               name="search"
+               placeholder="Search Transaction"
+               class="form-control">
+
+    </form>
+
+</div>
+
+<!-- Cards -->
+
+<div class="row mt-4 g-4">
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>Total Income</h4>
+
+            <h2>
+                ₹ {{ income }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>Total Expense</h4>
+
+            <h2>
+                ₹ {{ expense }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="dashboard-card">
+
+            <h4>Balance</h4>
+
+            <h2>
+                ₹ {{ balance }}
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Chart -->
+
+<div class="dashboard-card mt-5">
+
+    <h3 class="mb-4">
+        Expense Analytics
+    </h3>
+
+    <canvas id="expenseChart"></canvas>
+
+</div>
+
+<!-- Table -->
+
+<table class="table table-bordered mt-4">
+
+    <tr>
+
+        <th>Title</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Action</th>
+
+    </tr>
+
+    {% for i in transactions %}
+
+    <tr>
+
+        <td>{{ i.title }}</td>
+
+        <td>
+            ₹ {{ i.amount }}
+        </td>
+
+        <td>
+            {{ i.transaction_type }}
+        </td>
+
+        <td>
+            {{ i.category }}
+        </td>
+
+        <td>
+            {{ i.created_at }}
+        </td>
+
+        <td class="d-flex gap-2">
+
+            <!-- Edit -->
+
+            <a href="/edit/{{i.id}}/"
+               class="btn btn-warning btn-sm">
+
+               Edit
+
+            </a>
+
+            <!-- Delete -->
+
+            <a href="/delete/{{i.id}}/"
+               class="btn btn-danger btn-sm"
+               onclick="return confirmDelete()">
+
+               Delete
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
